@@ -1,0 +1,41 @@
+Algorithm LinearSearch(arr, target)
+Pre: arr is an array, target is the element to be found
+Post: return index if found, else return -1
+
+1. if arr is empty then
+       return -1
+2. for i = 0 to length(arr)-1 do
+       if arr[i] = target then
+            return i
+3. return -1
+End Algorithm
+
+
+(II)
+Algorithm LinearSearch(arr, target)
+Pre: arr is a list of elements, target is the element to find
+Post: returns the index of target if found, else returns -1
+
+start = 0
+end = length(arr) - 1
+
+For i = start to end do
+    If arr[i] = target then
+        Return i    // Found the element
+    End If
+End For
+
+Return -1   // Element not found
+End Algorithm
+
+
+(III)
+Algorithm LinearSearch(arr, target)
+Pre: arr is an array, target is the element to be found
+Post: return index if found, else return -1
+
+Step 1: If arr is empty, return -1
+Step 2: For i = 0 to length(arr)-1 do
+         Step 2.1: If arr[i] = target, return i
+Step 3: If target not found after loop, return -1
+End Algorithm

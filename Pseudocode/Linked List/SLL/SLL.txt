@@ -1,0 +1,328 @@
+==========================
+1) insertFirst(data)
+==========================
+
+# Idea: List ke start me naya node insert karna hai
+
+Algorithm:
+1. Pehle ek naya node banao jisme data store ho.
+   Create a new node N with data = data
+
+2. Ab is naye node ka next purane head pe lagao taaki ye puri list se jud jaaye.
+   N.next = head
+
+3. Ab head ko update kar do — ab head naye node ko point karega.
+   head = N
+
+4. Head ko return kar do.
+   Return head
+
+# Result: Naya node list ke beginning me aa gaya
+# Time Complexity: O(1)
+
+
+
+==========================
+2) insertLast(data)
+==========================
+
+# Idea: List ke end me naya node add karna hai
+
+Algorithm:
+1. Ek naya node banao jisme data store ho.
+   Create a new node N with data = data
+
+2. Agar head null hai matlab list khali hai — to head ko hi N bana do.
+   If head == null
+       head = N
+       Return head
+
+3. Agar list me nodes hai to ek pointer lo aur head se start karo.
+   Set ptr = head
+
+4. Jab tak last node nahi milta (jiska next null ho), tab tak aage badhte jao.
+   While ptr.next != null
+       ptr = ptr.next
+   End While
+
+5. Ab last node mil gaya hai — uske next me N jod do.
+   ptr.next = N
+
+6. Head ko return kar do.
+   Return head
+
+# Result: Naya node list ke end me add ho gaya
+# Time Complexity: O(n)
+
+
+==========================
+3) insertAt(index, data)
+==========================
+
+# Idea:
+# Kisi specific position (index) par naya node insert karna hai.
+# Example: Agar list me 4 nodes hain aur tumhe index 2 pe insert karna hai,
+# to naya node 2nd aur 3rd ke beech me aayega.
+
+Algorithm:
+
+1. Agar index 0 hai, matlab start me insert karna hai.
+   # Directly first position me daalne ke liye insertFirst(data) call kar lo.
+   If index == 0
+       Call insertFirst(data)
+       Return
+
+2. Ek naya node banao data ke saath.
+   # Yeh node list me insert hone wala hai.
+   Create a new node N with data = data
+
+3. Pointer lo aur head se start karo.
+   # Hum pointer se list me traverse karenge jahan tak insert karna hai.
+   Set ptr = head
+
+4. i = 0 se index - 2 tak loop chalao.
+   # Kyunki hume us node tak pahunchna hai jo naye node ke pehle hai.
+   For i = 0 to index - 2
+       If ptr == null
+           # Agar beech me hi null mil gaya, matlab index galat hai.
+           Print "Invalid index"
+           Return
+       ptr = ptr.next
+
+5. Ab naye node ka next purane next se connect karo.
+   # Isse naya node next nodes se jud jaayega.
+   N.next = ptr.next
+
+6. Ab purane node (ptr) ka next naye node se connect karo.
+   # Is step se naya node list ke beech me insert ho jaayega.
+   ptr.next = N
+
+7. Head ko return kar do.
+   Return head
+
+# Result:
+# Naya node given index pe insert ho gaya.
+# Time Complexity: O(n) — list traverse karni padti hai.
+
+
+
+==========================
+4) deleteFirst()
+==========================
+
+# Idea:
+# Pehla node delete karna hai, matlab head ko next node pe shift karna.
+
+Algorithm:
+
+1. Agar head null hai to matlab list already khali hai.
+   # Koi node hi nahi hai delete karne ke liye.
+   If head == null
+       Print "List is empty"
+       Return
+
+2. Agar head null nahi hai:
+   # Head ko uske next pe move kar do.
+   # Matlab pehla node skip kar diya jaayega.
+   head = head.next
+
+3. Head ko return kar do.
+   Return head
+
+# Result:
+# First node delete ho gaya, head ab dusre node pe point kar raha hai.
+# Time Complexity: O(1)
+
+
+==========================
+5) deleteLast()
+==========================
+
+# Idea:
+# Last node delete karna hai, matlab list ke end tak jaake
+# second last node ka next = null kar dena.
+
+Algorithm:
+
+1. Agar head null hai, matlab list khali hai.
+   # Koi element hi nahi delete karne ke liye.
+   If head == null
+       Print "List is empty"
+       Return
+
+2. Agar sirf ek hi node hai:
+   # Matlab head.next == null, to head = null kar do.
+   # Pure list empty ho jaayegi.
+   If head.next == null
+       head = null
+       Return
+
+3. Pointer lo aur head pe rakho.
+   # Hum list ke through end tak traverse karenge.
+   Set ptr = head
+
+4. Jab tak ptr.next.next null nahi hota tab tak aage badho.
+   # Hum second last node tak pahunchna chahte hain.
+   While ptr.next.next != null
+       ptr = ptr.next
+
+5. Ab hum last se ek node pe hain.
+   # Last node delete karne ke liye ptr.next = null kar do.
+   ptr.next = null
+
+6. Head ko return kar do.
+   Return head
+
+# Result:
+# Last node delete ho gaya, aur ab list ek node chhoti ho gayi.
+# Time Complexity: O(n)
+
+
+==========================
+6) deleteAt(index)
+==========================
+
+# Idea:
+# Kisi specific position (index) ka node delete karna hai.
+# Example: agar list hai [10 -> 20 -> 30 -> 40]
+# aur tumhe index 2 delete karna hai, to 30 delete hoga.
+
+Algorithm:
+
+1. Agar head null hai, matlab list khali hai.
+   # Kuch bhi delete karne ke liye nahi hai.
+   If head == null
+       Print "List is empty"
+       Return
+
+2. Agar index 0 hai:
+   # Matlab pehla node delete karna hai, toh directly deleteFirst() call kar lo.
+   If index == 0
+       Call deleteFirst()
+       Return
+
+3. Pointer lo aur head pe rakho.
+   Set ptr = head
+
+4. i = 0 se index - 2 tak loop chalao.
+   # Hume us node tak pahunchna hai jiske baad wala node delete hoga.
+   For i = 0 to index - 2
+       If ptr.next == null
+           # Agar null mil gaya to index invalid hai.
+           Print "Invalid index"
+           Return
+       ptr = ptr.next
+
+5. Agar ptr.next null hai:
+   # Matlab delete hone wala node exist hi nahi karta.
+   If ptr.next == null
+       Print "Invalid index"
+       Return
+
+6. ptr.next = ptr.next.next kar do.
+   # Matlab jis node ko delete karna tha, usko skip kar diya gaya.
+   ptr.next = ptr.next.next
+
+7. Head return karo.
+   Return head
+
+# Result:
+# Given index ka node delete ho gaya.
+# Time Complexity: O(n)
+
+
+
+==========================
+7) search(value)
+==========================
+
+# Idea:
+# List me ek specific value dhundhni hai aur uska index print karna hai.
+
+Algorithm:
+
+1. Pointer lo aur head pe set karo.
+   Set ptr = head
+
+2. Index variable rakho (0 se start) count ke liye.
+   index = 0
+
+3. Jab tak ptr null nahi hota:
+   While ptr != null
+       # Agar current node ka data value ke barabar hai:
+       If ptr.data == value
+           Print "Found at index: " + index
+           Return
+       # Nahi to next node pe jao.
+       ptr = ptr.next
+       index++
+
+4. Agar pura loop complete ho gaya aur value nahi mili:
+   Print "Value not found"
+
+# Result:
+# Value mil jaati hai to index print hota hai, warna "Not found".
+# Time Complexity: O(n)
+
+
+
+==========================
+8) display()
+==========================
+
+# Idea:
+# Poore linked list ke saare nodes print karne hai.
+
+Algorithm:
+
+1. Agar head null hai:
+   # Matlab list khali hai, print kar do "List is empty".
+   If head == null
+       Print "List is empty"
+       Return
+
+2. Pointer lo aur head pe rakho.
+   Set ptr = head
+
+3. Jab tak ptr null nahi hota:
+   # Har node ka data print karte jao.
+   While ptr != null
+       Print ptr.data + " -> "
+       ptr = ptr.next
+
+4. Jab loop khatam ho jaaye:
+   # End me "null" print kar do to show end of list.
+   Print "null"
+
+# Result:
+# List ke saare nodes print ho gaye.
+# Time Complexity: O(n)
+
+
+
+==========================
+9) isEmpty()
+==========================
+
+# Idea:
+# Check karna hai list khali hai ya nahi.
+
+Algorithm:
+
+1. Agar head null hai:
+   # Matlab list empty hai.
+   If head == null
+       Return true
+
+2. Nahi to:
+   # Matlab list me kuch nodes hai.
+   Else
+       Return false
+
+# Result:
+# Returns true agar list khali hai, warna false.
+# Time Complexity: O(1)
+
+
+
+

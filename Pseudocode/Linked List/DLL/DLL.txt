@@ -1,0 +1,309 @@
+==========================
+DOUBLY LINKED LIST (DLL) ALGORITHMS — EXPLAINED
+==========================
+
+Node Structure:
+---------------
+# Har node ke paas 3 parts hote hain:
+# 1️⃣ Data - jisme value store hoti hai
+# 2️⃣ prev pointer - previous node ka address rakhta hai
+# 3️⃣ next pointer - next node ka address rakhta hai
+
+class DNode {
+    int data;
+    DNode prev;
+    DNode next;
+
+    DNode(int d) {
+        data = d;
+        prev = null;
+        next = null;
+    }
+}
+
+Head Pointer:
+-------------
+DNode head = null;   # Yeh humara starting point hai of the list
+
+==========================
+1) Create Node and Insert at End (create / add)
+==========================
+
+1. Pehle ek naya node banao jisme data store ho
+   (Create a new node temp = new DNode(data))
+
+2. Ab us node ke dono links ko null kar do 
+   (temp.next = null, temp.prev = null)
+
+3. Ab check karo agar head == null hai 
+   (If head == null)
+       To matlab list abhi empty hai, to head ko usi new node pe point kar do
+       (head = temp)
+       Aur return kar do
+       (Return)
+
+4. Agar list me pehle se nodes hain to ek pointer banao aur head se start karo
+   (Set ptr = head)
+   Jab tak list ke end tak nahi pahuchte tab tak next pointer se move karte raho
+   (While ptr.next != null
+        ptr = ptr.next)
+
+5. Jab last node mil jaaye to uske next ko new node se link kar do 
+   (ptr.next = temp)
+
+6. Ab naye node ke prev ko us last node se link kar do 
+   (temp.prev = ptr)
+
+7. Head ko return kar do
+   (Return head)
+pgsql
+Copy code
+==========================
+2) insertFirst(data)
+==========================
+
+1. Pehle ek naya node banao aur usme data store karo 
+   (Create new node temp = new DNode(data))
+
+2. Ab naye node ka next head ko point kare 
+   (temp.next = head)
+
+3. Agar list me pehle se kuch hai, matlab head null nahi hai,
+   to pehle wale node ka prev naye node ko point kare
+   (If head != null
+        head.prev = temp)
+
+4. Ab head ko naye node pe update kar do
+   (head = temp)
+
+5. Return kar do head
+   (Return head)
+pgsql
+Copy code
+==========================
+3) insertLast(data)
+==========================
+
+1. Pehle ek naya node banao jisme data ho 
+   (Create new node temp = new DNode(data))
+
+2. Agar list empty hai to head ko usi node pe point kar do aur return kar do 
+   (If head == null
+        head = temp
+        Return)
+
+3. Agar list empty nahi hai to ek pointer banao aur head se start karo
+   (Set ptr = head)
+   Jab tak last node tak nahi jaate tab tak aage badhte raho
+   (While ptr.next != null
+        ptr = ptr.next)
+
+4. Ab ptr last node pe hai. Uske next ko naye node se link karo 
+   (ptr.next = temp)
+
+5. Naye node ke prev ko ptr pe point kar do 
+   (temp.prev = ptr)
+
+6. Return kar do head 
+   (Return head)
+pgsql
+Copy code
+==========================
+4) insertAt(index, data)
+==========================
+
+1. Agar index 0 hai to pehle se likha hua function call karo 
+   (If index == 0
+        Call insertFirst(data)
+        Return)
+
+2. Ek naya node banao jisme data store ho 
+   (Create new node temp = new DNode(data))
+
+3. Ek pointer lo aur head se start karo 
+   (Set ptr = head)
+
+4. Ab loop chalao taaki pointer ko us jagah tak le jaa sako jahan new node insert karna hai
+   (For i = 0 to index - 1
+        ptr = ptr.next)
+
+5. Ab naye node ka prev us node ke pehle wale node ko point kare 
+   (temp.prev = ptr.prev)
+
+6. Naye node ka next current node ko point kare 
+   (temp.next = ptr)
+
+7. Agar current node ke pehle koi node hai to uska next naye node ko point kare 
+   (If ptr.prev != null
+        ptr.prev.next = temp)
+
+8. Ab current node ka prev naye node ko point kare 
+   (ptr.prev = temp)
+
+9. Agar insert position start me hai to head ko naye node pe update kar do 
+   (If index == 0
+        head = temp)
+pgsql
+Copy code
+==========================
+5) deleteFirst()
+==========================
+
+1. Pehle check karo list empty hai ya nahi 
+   (If head == null
+        Print "List is empty"
+        Return)
+
+2. Agar list empty nahi hai to head ko uske next node pe move kar do 
+   (head = head.next)
+
+3. Agar ab naya head null nahi hai to uska prev pointer null kar do 
+   (If head != null
+        head.prev = null)
+
+4. Return head 
+   (Return head)
+pgsql
+Copy code
+==========================
+6) deleteLast()
+==========================
+
+1. Pehle check karo agar list empty hai 
+   (If head == null
+        Print "List is empty"
+        Return)
+
+2. Agar sirf ek hi node hai to seedha head ko null kar do 
+   (If head.next == null
+        head = null
+        Return)
+
+3. Agar ek se zyada node hai to ek pointer lo aur head se traverse karo 
+   (Set ptr = head)
+   Jab tak last node nahi milta tab tak aage jaate raho 
+   (While ptr.next != null
+        ptr = ptr.next)
+
+4. Jab last node mil jaaye to uske pehle wale node ka next null kar do 
+   (ptr.prev.next = null)
+
+5. Return head 
+   (Return head)
+pgsql
+Copy code
+==========================
+7) deleteAt(index)
+==========================
+
+1. Pehle check karo list empty hai ya nahi 
+   (If head == null
+        Print "List is empty"
+        Return)
+
+2. Agar index 0 hai to pehla node delete karne wala function call karo 
+   (If index == 0
+        Call deleteFirst()
+        Return)
+
+3. Ek pointer banao aur head se start karo 
+   (Set ptr = head)
+
+4. Ab pointer ko us node tak le jao jise delete karna hai 
+   (For i = 0 to index
+        ptr = ptr.next)
+
+5. Uske pehle wale node ka next uske next wale node pe point kare 
+   (ptr.prev.next = ptr.next)
+
+6. Agar uske next me koi node exist karta hai to uska prev update kar do 
+   (If ptr.next != null
+        ptr.next.prev = ptr.prev)
+
+7. Return head 
+   (Return head)
+pgsql
+Copy code
+==========================
+8) search(value)
+==========================
+
+1. Ek pointer banao aur head se start karo 
+   (Set ptr = head)
+
+2. Ek index variable rakho jisme current position store karte rahenge 
+   (index = 0)
+
+3. Jab tak list khatam nahi hoti tab tak har node check karo 
+   (While ptr != null)
+
+4. Agar current node ka data search value ke barabar hai to print karo 
+   (If ptr.data == value
+        Print "Found at index: " + index
+        Return)
+
+5. Agar nahi mila to pointer ko aage badhao aur index++ karo 
+   (ptr = ptr.next
+        index++)
+
+6. Agar puri list traverse kar li aur nahi mila to print karo "Value not found"
+   (Print "Value not found")
+pgsql
+Copy code
+==========================
+9) displayForward()
+==========================
+
+1. Check karo agar list empty hai 
+   (If head == null
+        Print "List is empty"
+        Return)
+
+2. Ek pointer banao aur head se start karo 
+   (Set ptr = head)
+
+3. Jab tak pointer null nahi hota, har node ka data print karo 
+   (While ptr != null
+        Print ptr.data + " <-> "
+        ptr = ptr.next)
+
+4. Jab list khatam ho jaaye to "null" print karo 
+   (Print "null")
+pgsql
+Copy code
+==========================
+10) displayReverse()
+==========================
+
+1. Check karo agar list empty hai 
+   (If head == null
+        Print "List is empty"
+        Return)
+
+2. Ek pointer banao aur head se start karo 
+   (Set ptr = head)
+
+3. Ab last node tak traverse karo 
+   (While ptr.next != null
+        ptr = ptr.next)
+
+4. Ab reverse direction me print karna start karo 
+   (While ptr != null
+        Print ptr.data + " <-> "
+        ptr = ptr.prev)
+
+5. Jab end ho jaaye to "null" print karo 
+   (Print "null")
+pgsql
+Copy code
+==========================
+11) isEmpty()
+==========================
+
+1. Check karo agar head null hai 
+   (If head == null
+        Return true)
+
+2. Agar head null nahi hai to false return karo 
+   (Else
+        Return false)

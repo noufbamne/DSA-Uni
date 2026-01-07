@@ -1,0 +1,208 @@
+==================== BST ADT ====================
+A Binary Search Tree is a binary tree where:
+Left subtree < Node < Right subtree
+
+Node contains:
+data
+left pointer
+right pointer
+
+==================== OPERATIONS ====================
+1. Create Tree
+2. Insert (ptr method)
+3. Search (ptr method)
+4. Delete (3 conditions using ptr)
+5. Inorder Traversal
+6. Preorder Traversal
+7. Postorder Traversal
+8. Update Value
+9. Print Leaf Nodes
+10. Print Path to a Node
+11. Print Exterior (Boundary) Nodes
+12. Print Interior Nodes
+
+===================================================
+createTree()
+===================================================
+Precondition: Tree is empty
+Postcondition: Root node created
+Time Complexity: O(1)
+
+Pseudo:
+1. Input value
+2. root = new Node(value)
+3. ptr = root
+4. Print "Tree created successfully"
+
+===================================================
+insert(root, value) using ptr
+===================================================
+Precondition: BST exists or empty
+Postcondition: value inserted properly
+TC: Best O(1), Avg O(log n), Worst O(n)
+
+Pseudo:
+1. newNode = new Node(value)
+
+2. if root == null:
+        root = newNode
+        return root
+
+3. ptr = root
+4. parent = null
+
+5. while ptr != null:
+        parent = ptr
+        if value == ptr.data:
+             print "Duplicate not allowed"
+             return root
+        if value < ptr.data:
+             ptr = ptr.left
+        else:
+             ptr = ptr.right
+
+6. if value < parent.data:
+        parent.left = newNode
+   else:
+        parent.right = newNode
+
+7. return root
+
+===================================================
+search(root, value) using ptr
+===================================================
+Precondition: Any tree state
+Postcondition: true/false
+TC: Best O(1), Avg O(log n), Worst O(n)
+
+Pseudo:
+1. if root == null:
+        return false
+2. ptr = root
+3. while ptr != null:
+        if ptr.data == value:
+             return true
+        if value < ptr.data:
+             ptr = ptr.left
+        else:
+             ptr = ptr.right
+4. return false
+
+===================================================
+delete(root, value)
+===================================================
+Precondition: BST exists or empty
+Postcondition: node removed if found
+TC: Best O(1), Avg O(log n), Worst O(n)
+
+Pseudo:
+1. if root == null:
+        return null
+
+2. if value < root.data:
+        root.left = delete(root.left, value)
+        return root
+
+3. if value > root.data:
+        root.right = delete(root.right, value)
+        return root
+
+4. else:
+
+   Case-1: no child
+        if root.left == null AND root.right == null:
+              return null
+
+   Case-2: one child
+        if root.left == null:
+              return root.right
+        if root.right == null:
+              return root.left
+
+   Case-3: two children
+        successor = minNode(root.right)
+        root.data = successor.data
+        root.right = delete(root.right, successor.data)
+        return root
+
+===================================================
+minNode(ptr)
+===================================================
+Precondition: Subtree exists
+Postcondition: Minimum node returned
+Time Complexity: O(h)
+
+Pseudo:
+1. while ptr.left != null:
+        ptr = ptr.left
+2. return ptr
+
+===================================================
+inorder(ptr)
+===================================================
+Precondition: Tree exists, ptr = current node (start with root)
+Postcondition: Left Root Right printed
+Time Complexity: O(n)
+
+Pseudo:
+1. if ptr == null:
+       return
+2. inorder(ptr.left)
+3. print ptr.data
+4. inorder(ptr.right)
+
+===================================================
+preorder(ptr)
+===================================================
+Precondition: Tree exists, ptr = current node (start with root)
+Postcondition: Root Left Right printed
+Time Complexity: O(n)
+
+Pseudo:
+1. if ptr == null:
+       return
+2. print ptr.data
+3. preorder(ptr.left)
+4. preorder(ptr.right)
+
+===================================================
+postorder(ptr)
+===================================================
+Precondition: Tree exists, ptr = current node (start with root)
+Postcondition: Left Right Root printed
+Time Complexity: O(n)
+
+Pseudo:
+1. if ptr == null:
+       return
+2. postorder(ptr.left)
+3. postorder(ptr.right)
+4. print ptr.data
+
+===================================================
+update(ptr, key, newValue)
+
+===================================================
+
+Precondition: Tree exists (ptr = root)
+Postcondition: Value of given node updated if found
+Time Complexity:
+Best O(1), Avg O(log n), Worst O(n)
+
+Pseudo:
+1. if ptr == null:
+        print "Tree is empty!"
+        return
+
+2. while ptr != null:
+        if key == ptr.data:
+              ptr.data = newValue
+              print "Node updated successfully!"
+              return
+
+        if key < ptr.data:
+              ptr = ptr.left
+        else:
+              ptr = ptr.right
+
+3. print "Node not found!"

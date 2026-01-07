@@ -1,0 +1,42 @@
+Algorithm InsertionSort(arr)
+Pre: arr is an array
+Post: arr is sorted in ascending order
+
+1. for i = 0 to length(arr)-2 do
+       for j = i+1 down to 1 do
+            if arr[j] < arr[j-1] then
+                 swap arr[j], arr[j-1]
+            else
+                 break
+2. return arr
+End Algorithm
+
+
+(II)
+Algorithm InsertionSort(arr)
+Pre: arr is a list of elements
+Post: arr is sorted in ascending order
+
+For i = 1 to length(arr) - 1 do
+    j = i
+    While j > 0 AND arr[j] < arr[j-1] do
+        swap arr[j], arr[j-1]   // Move element left if smaller
+        j = j - 1
+    End While
+End For
+
+Return arr
+End Algorithm
+
+
+(III)
+Algorithm InsertionSort(arr)
+Pre: arr is an array
+Post: arr sorted in ascending order
+
+Step 1: For i = 0 to length(arr)-2 do
+         Step 1.1: For j = i+1 down to 1 do
+                     If arr[j] < arr[j-1], swap arr[j] and arr[j-1]
+                     Else, break
+Step 2: Return arr
+End Algorithm 

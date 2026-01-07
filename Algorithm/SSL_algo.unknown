@@ -1,0 +1,91 @@
+==========================
+SINGLY LINKED LIST (SLL) ALGORITHMS
+==========================
+
+1) insertFirst(data)
+--------------------------
+Algorithm:
+1. Create a new node N and store the given data inside it.
+2. Make the next pointer of N point to the current head of the list.
+3. Update the head pointer to now point to the new node N.
+4. Return the updated head of the list.
+
+--------------------------
+2) insertLast(data)
+--------------------------
+Algorithm:
+1. Create a new node N and store the given data inside it.
+2. If the list is empty (head is null), set head = N and return head.
+3. Otherwise, start from the head and traverse through each node until reaching the last node (node whose next is null).
+4. Set the next pointer of the last node to the new node N.
+5. Return the updated head of the list.
+
+--------------------------
+3) insertAt(index, data)
+--------------------------
+Algorithm:
+1. If the specified index is 0, call insertFirst(data) to insert at the beginning.
+2. Otherwise, create a new node N and store the given data inside it.
+3. Start from the head and move forward (index - 1) times to reach the node after which the new node should be inserted.
+4. If during traversal the node becomes null, print "Invalid index" and stop.
+5. Set the next pointer of N to point to the next node of the current node.
+6. Update the next pointer of the current node to point to the new node N.
+7. Return the updated head of the list.
+
+--------------------------
+4) deleteFirst()
+--------------------------
+Algorithm:
+1. Check if the list is empty (head is null). If yes, print "List is empty" and stop.
+2. Otherwise, move the head pointer to the next node.
+3. Return the updated head of the list.
+
+--------------------------
+5) deleteLast()
+--------------------------
+Algorithm:
+1. Check if the list is empty. If yes, print "List is empty" and stop.
+2. If the list has only one node (head.next is null), set head = null and return.
+3. Otherwise, start from the head and traverse until reaching the second last node (node whose next.next is null).
+4. Set the next pointer of the second last node to null, effectively removing the last node.
+5. Return the updated head of the list.
+
+--------------------------
+6) deleteAt(index)
+--------------------------
+Algorithm:
+1. If the list is empty (head is null), print "List is empty" and stop.
+2. If index is 0, call deleteFirst() to remove the first node.
+3. Otherwise, start from the head and move forward (index - 1) times to reach the node before the one to be deleted.
+4. If during traversal the next node is null, print "Invalid index" and stop.
+5. Set the next pointer of the current node to skip the node to be deleted, i.e., point it to ptr.next.next.
+6. Return the updated head of the list.
+
+--------------------------
+7) search(value)
+--------------------------
+Algorithm:
+1. Start from the head and initialize an index counter to 0.
+2. Traverse the list node by node:
+       a. If the current node's data matches the value, print "Found at index: " + index and stop.
+       b. Otherwise, move to the next node and increment the index.
+3. If traversal ends without finding the value, print "Value not found".
+
+--------------------------
+8) display()
+--------------------------
+Algorithm:
+1. Check if the list is empty. If yes, print "List is empty" and stop.
+2. Start from the head and traverse through all nodes:
+       a. Print the data of each node followed by " -> ".
+3. After the last node, print "null".
+
+--------------------------
+9) isEmpty()
+--------------------------
+Algorithm:
+1. Check if the head pointer is null.
+2. If head is null, return true (list is empty).
+3. Otherwise, return false (list is not empty).
+
+==========================

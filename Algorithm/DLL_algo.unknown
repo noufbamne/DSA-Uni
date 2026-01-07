@@ -1,0 +1,140 @@
+==========================
+DOUBLY LINKED LIST (DLL) – EXAM VERSION
+==========================
+
+Node Structure:
+---------------
+class DNode {
+    int data;
+    DNode prev;
+    DNode next;
+    DNode(int d) { data = d; prev = null; next = null; }
+}
+
+Head Pointer:
+-------------
+DNode head = null
+
+ADT:
+insertFirst(data), insertLast(data), insertAt(index, data)
+deleteFirst(), deleteLast(), deleteAt(index)
+search(value), displayForward(), displayReverse(), isEmpty()
+
+==========================
+1) insertFirst(data)
+--------------------------
+Algorithm:
+1. Create a new node temp with data.
+2. Set temp.next = head.
+3. If head is not null, set head.prev = temp.
+4. Update head = temp.
+5. Return head.
+
+Time Complexity: O(1)
+
+==========================
+2) insertLast(data)
+--------------------------
+Algorithm:
+1. Create a new node temp with data.
+2. If head is null, set head = temp and return.
+3. Otherwise, traverse from head to last node.
+4. Set last.next = temp and temp.prev = last.
+5. Return head.
+
+Time Complexity: O(n)
+
+==========================
+3) insertAt(index, data)
+--------------------------
+Algorithm:
+1. If index = 0, call insertFirst(data) and return.
+2. Create new node temp with data.
+3. Start from head and move forward index times to reach the target node ptr.
+4. Set temp.prev = ptr.prev and temp.next = ptr.
+5. If ptr.prev != null, set ptr.prev.next = temp.
+6. Set ptr.prev = temp.
+7. If index = 0, update head = temp.
+8. Return head.
+
+Time Complexity: O(n)
+
+==========================
+4) deleteFirst()
+--------------------------
+Algorithm:
+1. If head is null, print "List is empty" and return.
+2. Move head to head.next.
+3. If head is not null, set head.prev = null.
+4. Return head.
+
+Time Complexity: O(1)
+
+==========================
+5) deleteLast()
+--------------------------
+Algorithm:
+1. If head is null, print "List is empty" and return.
+2. If head.next is null, set head = null and return.
+3. Traverse from head to last node ptr.
+4. Set ptr.prev.next = null.
+5. Return head.
+
+Time Complexity: O(n)
+
+==========================
+6) deleteAt(index)
+--------------------------
+Algorithm:
+1. If head is null, print "List is empty" and return.
+2. If index = 0, call deleteFirst() and return.
+3. Start from head and move forward index times to reach ptr (node to delete).
+4. Set ptr.prev.next = ptr.next.
+5. If ptr.next != null, set ptr.next.prev = ptr.prev.
+6. Return head.
+
+Time Complexity: O(n)
+
+==========================
+7) search(value)
+--------------------------
+Algorithm:
+1. Start from head and index = 0.
+2. Traverse each node:
+      a. If ptr.data == value, print "Found at index: " + index and return.
+      b. Move ptr = ptr.next, index++
+3. If value not found, print "Value not found".
+
+Time Complexity: O(n)
+
+==========================
+8) displayForward()
+--------------------------
+Algorithm:
+1. If head is null, print "List is empty" and return.
+2. Traverse from head to last node:
+      Print each node's data followed by "<->".
+3. Print "null" at the end.
+
+Time Complexity: O(n)
+
+==========================
+9) displayReverse()
+--------------------------
+Algorithm:
+1. If head is null, print "List is empty" and return.
+2. Traverse to last node starting from head.
+3. Traverse backward from last node to head:
+      Print each node's data followed by "<->".
+4. Print "null" at the end.
+
+Time Complexity: O(n)
+
+==========================
+10) isEmpty()
+--------------------------
+Algorithm:
+1. If head is null, return true.
+2. Otherwise, return false.
+
+Time Complexity: O(1)

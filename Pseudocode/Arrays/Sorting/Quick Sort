@@ -1,0 +1,79 @@
+Algorithm QuickSort(arr, start, end)
+Pre: arr is an array, start and end are indices
+Post: arr is sorted in ascending order
+
+1. if start >= end then
+       return
+2. mid = start + (end - start) / 2
+3. pivot = arr[mid]
+4. left = start
+5. right = end
+6. while left <= right do
+       while arr[left] < pivot do
+            left = left + 1
+       while arr[right] > pivot do
+            right = right - 1
+       if left <= right then
+            swap arr[left], arr[right]
+            left = left + 1
+            right = right - 1
+7. QuickSort(arr, start, right)
+8. QuickSort(arr, left, end)
+9. return arr
+End Algorithm
+
+
+(II)
+Algorithm QuickSort(arr, start, end)
+Pre: arr is a list, start and end are indices
+Post: arr is sorted in ascending order
+
+If start >= end then
+    Return    // Only 0 or 1 element, already sorted
+End If
+
+mid = start + (end - start) / 2
+pivot = arr[mid]
+left = start
+right = end
+
+While left <= right do
+    While arr[left] < pivot do
+        left = left + 1
+    End While
+
+    While arr[right] > pivot do
+        right = right - 1
+    End While
+
+    If left <= right then
+        swap arr[left], arr[right]
+        left = left + 1
+        right = right - 1
+    End If
+End While
+
+QuickSort(arr, start, right)   // Sort left half
+QuickSort(arr, left, end)      // Sort right half
+
+Return arr
+End Algorithm
+
+
+(III)
+Algorithm QuickSort(arr, start, end)
+Pre: arr is an array, start and end are indices
+Post: arr sorted in ascending order
+
+Step 1: If start >= end, return
+Step 2: mid = start + (end - start)/2
+Step 3: pivot = arr[mid]
+Step 4: left = start, right = end
+Step 5: While left <= right do
+         Step 5.1: Move left forward while arr[left] < pivot
+         Step 5.2: Move right backward while arr[right] > pivot
+         Step 5.3: If left <= right, swap arr[left] and arr[right], left = left + 1, right = right - 1
+Step 6: QuickSort(arr, start, right)  // sort left half
+Step 7: QuickSort(arr, left, end)    // sort right half
+Step 8: Return arr
+End Algorithm

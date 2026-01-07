@@ -1,0 +1,223 @@
+==========================
+DOUBLY CIRCULAR LINKED LIST (DCLL) ALGORITHMS
+==========================
+
+// Node Structure:
+class DCNode {
+    int data;
+    DCNode prev;
+    DCNode next;
+
+    DCNode(int d) {
+        data = d;
+        prev = null; // pehle pointer null
+        next = null; // pehle pointer null
+    }
+}
+
+Head & Tail Pointers:
+DCNode head = null; // starting node
+DCNode tail = null; // last node
+
+ADT (Operations List):
+insertFirst(data)
+insertLast(data)
+insertAt(index, data)
+deleteFirst()
+deleteLast()
+deleteAt(index)
+search(value)
+displayForward()
+displayReverse()
+isEmpty()
+
+==========================
+
+1)Create Node and Insert at End (create / add)
+Create new node temp = new DCNode(data)
+
+If head == null
+    head = temp       // list empty, temp hi head
+    tail = temp       // temp hi tail bhi
+    head.prev = tail  // circular prev
+    tail.next = head  // circular next
+    Return
+
+Else
+    Set ptr = head
+    While ptr.next != head
+        ptr = ptr.next   // end tak chalo
+    End While
+    ptr.next = temp
+    temp.prev = ptr
+    temp.next = head
+    head.prev = temp
+    tail = temp       // update tail
+Return head, tail
+
+==========================
+2) insertFirst(data)
+Create new node temp = new DCNode(data)
+
+If head == null
+    head = temp
+    tail = temp
+    head.prev = tail
+    tail.next = head
+    Return
+
+Else
+    temp.next = head
+    temp.prev = tail
+    head.prev = temp
+    tail.next = temp
+    head = temp       // head update
+Return head, tail
+
+==========================
+3) insertLast(data)
+Create new node temp = new DCNode(data)
+
+If head == null
+    head = temp
+    tail = temp
+    head.prev = tail
+    tail.next = head
+    Return
+
+Else
+    tail.next = temp
+    temp.prev = tail
+    temp.next = head
+    head.prev = temp
+    tail = temp       // tail update
+Return head, tail
+
+==========================
+4) insertAt(index, data)
+If index == 0
+    Call insertFirst(data)
+    Return
+
+Create new node temp = new DCNode(data)
+Set ptr = head
+
+For i = 0 to index - 1
+    ptr = ptr.next   // desired position pe jao
+
+temp.prev = ptr.prev
+temp.next = ptr
+ptr.prev.next = temp
+ptr.prev = temp
+
+If index == length
+    tail = temp     // tail update if last position
+
+Return head, tail
+
+==========================
+5) deleteFirst()
+If head == null
+    Print "List is empty"
+    Return
+
+If head == tail
+    head = null
+    tail = null
+    Return
+
+head = head.next
+head.prev = tail
+tail.next = head
+Return head, tail
+
+==========================
+6) deleteLast()
+If head == null
+    Print "List is empty"
+    Return
+
+If head == tail
+    head = null
+    tail = null
+    Return
+
+tail = tail.prev
+tail.next = head
+head.prev = tail
+Return head, tail
+
+==========================
+7) deleteAt(index)
+If head == null
+    Print "List is empty"
+    Return
+
+If index == 0
+    Call deleteFirst()
+    Return
+
+Set ptr = head
+
+For i = 0 to index - 1
+    ptr = ptr.next   // delete karne ke liye node tak jao
+
+ptr.prev.next = ptr.next
+ptr.next.prev = ptr.prev
+
+If ptr == tail
+    tail = ptr.prev   // tail update agar last node delete hua
+
+Return head, tail
+
+==========================
+8) search(value)
+Set ptr = head
+index = 0
+
+While ptr != null
+    If ptr.data == value
+        Print "Found at index: " + index
+        Return
+    ptr = ptr.next
+    If ptr == head break
+    index++
+Print "Value not found"
+
+==========================
+9) displayForward()
+If head == null
+    Print "List is empty"
+    Return
+
+Set ptr = head
+
+While ptr != null
+    Print ptr.data + " <-> "
+    ptr = ptr.next
+    If ptr == head break
+
+Print "(head)"
+
+==========================
+10) displayReverse()
+If head == null
+    Print "List is empty"
+    Return
+
+Set ptr = tail
+
+While ptr != null
+    Print ptr.data + " <-> "
+    ptr = ptr.prev
+    If ptr == tail.next break
+
+Print "(head)"
+
+==========================
+11) isEmpty()
+If head == null
+    Return true
+Else
+    Return false
+==========================

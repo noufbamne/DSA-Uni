@@ -1,0 +1,171 @@
+===============================================
+      LINEAR QUEUE USING ARRAY (PSEUDOCODE)
+===============================================
+
+# Initialization
+-----------------------------------------------
+maxSize = user_defined_size
+queue[maxSize]
+front = -1
+rear = -1
+
+-----------------------------------------------
+1) enqueue(data)
+-----------------------------------------------
+# Idea: Queue ke end (rear) me element insert karna hai
+
+# Precondition: Queue exists
+# Postcondition: Adds a new element at the rear end
+
+Algorithm:
+1. if rear == maxSize - 1 then
+       print "Queue Overflow"
+       return
+       # Queue full ho gaya, aur element nahi daal sakte
+
+2. if front == -1 then
+       front = 0
+       # Pehli baar insert ho raha hai toh front set karo
+
+3. rear = rear + 1
+   queue[rear] = data
+   # Rear badhao aur new element store karo
+
+4. print data + " inserted successfully"
+
+-----------------------------------------------
+2) dequeue()
+-----------------------------------------------
+# Idea: Queue ke front se element nikalna hai
+
+# Precondition: Queue exists
+# Postcondition: Removes front element, updates front pointer,
+#                and returns the deleted value.
+
+Algorithm:
+1. if front == -1 OR front > rear then
+       print "Queue Underflow"
+       return
+       # Queue already empty hai
+
+2. temp = queue[front]
+   # Front element ko pehle temp me store kar lo (taaki value safe rahe)
+
+3. print "Deleted: " + temp
+   # Ab safe temp value ko display karo
+
+4. front = front + 1
+   # Front pointer ko ek step aage badhao
+
+5. if front > rear then
+       front = -1
+       rear = -1
+       # Agar sab elements delete ho gaye, queue reset kar do
+
+6. return temp
+   # Deleted element ko return kar do (agar chahiye)
+
+-----------------------------------------------
+3) display()
+-----------------------------------------------
+# Idea: Queue ke saare elements front se rear tak dikhana hai
+
+# Precondition: Queue exists
+# Postcondition: Prints all current queue elements
+
+Algorithm:
+1. if front == -1 then
+       print "Queue is empty"
+       return
+       # Kuch bhi nahi hai print karne ke liye
+
+2. print "Queue elements are:"
+
+3. for i = front to rear do
+       print queue[i] + " <- "
+       # Front se rear tak sab elements dikhate jao
+
+4. print "END"
+
+-----------------------------------------------
+4) peek()
+-----------------------------------------------
+# Idea: Sirf front element dekhna hai, nikalna nahi
+
+# Precondition: Queue exists
+# Postcondition: Shows element at front without deleting
+
+Algorithm:
+1. if front == -1 then
+       print "Queue is empty"
+       return
+
+2. print "Front element is: " + queue[front]
+
+-----------------------------------------------
+5) isEmpty()
+-----------------------------------------------
+# Idea: Queue khaali hai ya nahi check karna
+
+# Precondition: Queue exists
+# Postcondition: Returns true if empty, else false
+
+Algorithm:
+1. if front == -1 OR front > rear then
+       return true
+   else
+       return false
+
+-----------------------------------------------
+6) isFull()
+-----------------------------------------------
+# Idea: Queue bhar gaya hai ya nahi check karna
+
+# Precondition: Queue exists
+# Postcondition: Returns true if full, else false
+
+Algorithm:
+1. if rear == maxSize - 1 then
+       return true
+   else
+       return false
+
+-----------------------------------------------
+7) INITIAL CONDITION SUMMARY
+-----------------------------------------------
+front = -1
+rear = -1
+maxSize = user_defined
+queue[maxSize]
+
+# Queue empty state: front == -1 and rear == -1
+# Queue full state:  rear == maxSize - 1
+# Queue normal state: front <= rear
+
+-----------------------------------------------
+8) TERMINAL VISUALIZATION
+-----------------------------------------------
+
+# After Enqueue(10)
+Queue: [10]
+front = 0, rear = 0
+
+# After Enqueue(20)
+Queue: [10, 20]
+front = 0, rear = 1
+
+# After Dequeue()
+Deleted: 10
+Queue: [20]
+front = 1, rear = 1
+
+# After Enqueue(30)
+Queue: [20, 30]
+front = 1, rear = 2
+
+# Display
+Output: 20 <- 30 <- END
+
+-----------------------------------------------
+END OF PSEUDOCODE
+===============================================

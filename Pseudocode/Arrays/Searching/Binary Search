@@ -1,0 +1,56 @@
+Algorithm BinarySearch(arr, target)
+Pre: arr is a sorted array
+Post: return index if found, else return -1
+
+1. start = 0
+2. end = length(arr)-1
+3. while start <= end do
+       mid = start + (end - start) / 2
+       if arr[mid] = target then
+            return mid
+       else if target < arr[mid] then
+            end = mid - 1
+       else
+            start = mid + 1
+4. return -1
+End Algorithm
+
+
+(II)
+Algorithm BinarySearch(arr, target)
+Pre: arr is sorted in ascending order
+Post: returns the index of target if found, else returns -1
+
+start = 0
+end = length(arr) - 1
+
+While start <= end do
+    mid = start + (end - start) / 2    // Middle element
+
+    If arr[mid] = target then
+        Return mid    // Found the element
+    Else If target < arr[mid] then
+        end = mid - 1    // Look in left half
+    Else
+        start = mid + 1  // Look in right half
+    End If
+End While
+
+Return -1   // Element not found
+End Algorithm
+
+
+(III)
+Algorithm BinarySearch(arr, target)
+Pre: arr is a sorted array
+Post: return index if found, else return -1
+
+Step 1: Set start = 0
+Step 2: Set end = length(arr) - 1
+Step 3: While start <= end do
+         Step 3.1: mid = start + (end - start)/2
+         Step 3.2: If arr[mid] = target, return mid
+         Step 3.3: Else if target < arr[mid], set end = mid - 1
+         Step 3.4: Else, set start = mid + 1
+Step 4: If not found, return -1
+End Algorithm

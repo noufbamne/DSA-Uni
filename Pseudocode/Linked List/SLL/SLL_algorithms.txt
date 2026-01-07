@@ -1,0 +1,196 @@
+==========================
+SINGLY LINKED LIST (SLL) ALGORITHMS WITH TIME COMPLEXITY
+==========================
+
+Node Structure:
+---------------
+class Node {
+    int data;       
+    Node next;      
+    Node(int d) {
+        data = d;
+        next = null;
+    }
+}
+
+==========================
+ADT
+insertFirst(data)
+insertLast(data)
+insertAt(index, data)
+deleteFirst()
+deleteLast()
+deleteAt(index)
+search(value)
+display()
+isEmpty()
+==========================
+
+Head Pointer:
+-------------
+Node head = null;
+
+==========================
+1) insertFirst(data)
+--------------------------
+Precondition: head may be null or point to first node
+Postcondition: New node inserted at beginning; head updated
+Time Complexity: Best = O(1), Average = O(1), Worst = O(1)
+
+Algorithm:
+1. Create a new node N with data = data
+2. Set N.next = head
+3. Update head = N
+4. Return head
+
+==========================
+2) insertLast(data)
+--------------------------
+Precondition: head may be null or list exists
+Postcondition: New node inserted at end of list
+Time Complexity: Best = O(1), Average = O(n), Worst = O(n)
+
+Algorithm:
+1. Create a new node N with data = data
+2. If head == null
+       head = N
+       Return head
+3. Else
+       Set ptr = head
+       While ptr.next != null
+           ptr = ptr.next
+       End While
+       ptr.next = N
+4. Return head
+
+==========================
+3) insertAt(index, data)
+--------------------------
+Precondition: 0 ≤ index ≤ length of list
+Postcondition: New node inserted at specified index
+Time Complexity: Best = O(1), Average = O(n), Worst = O(n)
+
+Algorithm:
+1. If index == 0
+       Call insertFirst(data)
+       Return
+2. Create a new node N with data = data
+3. Set ptr = head
+4. For i = 0 to index - 2
+       If ptr == null
+           Print "Invalid index"
+           Return
+       ptr = ptr.next
+5. N.next = ptr.next
+6. ptr.next = N
+7. Return head
+
+==========================
+4) deleteFirst()
+--------------------------
+Precondition: head != null
+Postcondition: First node removed; head updated
+Time Complexity: Best = O(1), Average = O(1), Worst = O(1)
+
+Algorithm:
+1. If head == null
+       Print "List is empty"
+       Return
+2. head = head.next
+3. Return head
+
+==========================
+5) deleteLast()
+--------------------------
+Precondition: head != null
+Postcondition: Last node removed
+Time Complexity: Best = O(1), Average = O(n), Worst = O(n)
+
+Algorithm:
+1. If head == null
+       Print "List is empty"
+       Return
+2. If head.next == null
+       head = null
+       Return
+3. Set ptr = head
+4. While ptr.next.next != null
+       ptr = ptr.next
+5. ptr.next = null
+6. Return head
+
+==========================
+6) deleteAt(index)
+--------------------------
+Precondition: 0 ≤ index < length of list
+Postcondition: Node at index removed
+Time Complexity: Best = O(1), Average = O(n), Worst = O(n)
+
+Algorithm:
+1. If head == null
+       Print "List is empty"
+       Return
+2. If index == 0
+       Call deleteFirst()
+       Return
+3. Set ptr = head
+4. For i = 0 to index - 2
+       If ptr.next == null
+           Print "Invalid index"
+           Return
+       ptr = ptr.next
+5. If ptr.next == null
+       Print "Invalid index"
+       Return
+6. ptr.next = ptr.next.next
+7. Return head
+
+==========================
+7) search(value)
+--------------------------
+Precondition: Linked list exists
+Postcondition: Prints position if value found; else "Not found"
+Time Complexity: Best = O(1), Average = O(n), Worst = O(n)
+
+Algorithm:
+1. Set ptr = head
+2. index = 0
+3. While ptr != null
+       If ptr.data == value
+           Print "Found at index: " + index
+           Return
+       ptr = ptr.next
+       index++
+4. Print "Value not found"
+
+==========================
+8) display()
+--------------------------
+Precondition: Linked list exists
+Postcondition: All nodes printed in order
+Time Complexity: Best = O(1), Average = O(n), Worst = O(n)
+
+Algorithm:
+1. If head == null
+       Print "List is empty"
+       Return
+2. Set ptr = head
+3. While ptr != null
+       Print ptr.data + " -> "
+       ptr = ptr.next
+4. Print "null"
+
+==========================
+9) isEmpty()
+--------------------------
+Precondition: Linked list exists
+Postcondition: Returns true if list is empty; false otherwise
+Time Complexity: Best = O(1), Average = O(1), Worst = O(1)
+
+Algorithm:
+1. If head == null
+       Return true
+2. Else
+       Return false
+
+==========================

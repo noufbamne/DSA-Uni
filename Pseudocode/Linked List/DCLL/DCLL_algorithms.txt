@@ -1,0 +1,256 @@
+==========================
+DOUBLY CIRCULAR LINKED LIST (DCLL) ALGORITHMS
+==========================
+
+Node Structure:
+---------------
+class DCNode {
+    int data;
+    DCNode prev;
+    DCNode next;
+
+    DCNode(int d) {
+        data = d;
+        prev = null;
+        next = null;
+    }
+}
+
+Head Pointer:
+-------------
+DCNode head = null;
+
+ADT (Operations List):
+---------------------
+insertFirst(data)
+insertLast(data)
+insertAt(index, data)
+deleteFirst()
+deleteLast()
+deleteAt(index)
+search(value)
+displayForward()
+displayReverse()
+isEmpty()
+
+==========================
+1) Create Node and Insert at End (create / add)
+--------------------------
+Precondition: head may be null
+Postcondition: New node added at end; last node points to head; head.prev points to last node
+Time Complexity: Best = O(1), Average = O(n), Worst = O(n)
+
+Algorithm:
+1. Create new node temp = new DCNode(data)
+2. If head == null
+       head = temp
+       temp.next = head
+       temp.prev = head
+       Return
+3. Else
+       Set ptr = head
+       While ptr.next != head
+           ptr = ptr.next
+       End While
+       ptr.next = temp
+       temp.prev = ptr
+       temp.next = head
+       head.prev = temp
+4. Return head
+
+==========================
+2) insertFirst(data)
+--------------------------
+Precondition: head may be null
+Postcondition: New node added at beginning; last node points to new head
+Time Complexity: Best = O(1), Average = O(1), Worst = O(1)
+
+Algorithm:
+1. Create new node temp = new DCNode(data)
+2. If head == null
+       head = temp
+       temp.next = head
+       temp.prev = head
+       Return
+3. Else
+       Set last = head.prev
+       temp.next = head
+       temp.prev = last
+       last.next = temp
+       head.prev = temp
+       head = temp
+4. Return head
+
+==========================
+3) insertLast(data)
+--------------------------
+Precondition: head may be null
+Postcondition: New node added at end; last node points to head
+Time Complexity: Best = O(1), Average = O(1), Worst = O(1)
+
+Algorithm:
+1. Create new node temp = new DCNode(data)
+2. If head == null
+       head = temp
+       temp.next = head
+       temp.prev = head
+       Return
+3. Else
+       Set last = head.prev
+       last.next = temp
+       temp.prev = last
+       temp.next = head
+       head.prev = temp
+4. Return head
+
+==========================
+4) insertAt(index, data)
+--------------------------
+Precondition: 0 ≤ index ≤ length
+Postcondition: Node inserted at given index
+Time Complexity: Best = O(1), Average = O(n), Worst = O(n)
+
+Algorithm:
+1. If index == 0
+       Call insertFirst(data)
+       Return
+2. Create new node temp = new DCNode(data)
+3. Set ptr = head
+4. For i = 0 to index - 1
+       ptr = ptr.next
+5. temp.prev = ptr.prev
+6. temp.next = ptr
+7. ptr.prev.next = temp
+8. ptr.prev = temp
+9. If index == 0
+       head = temp
+
+==========================
+5) deleteFirst()
+--------------------------
+Precondition: head != null
+Postcondition: First node removed; head updated; last node points to new head
+Time Complexity: Best = O(1), Average = O(1), Worst = O(1)
+
+Algorithm:
+1. If head == null
+       Print "List is empty"
+       Return
+2. If head.next == head
+       head = null
+       Return
+3. Set last = head.prev
+4. head = head.next
+5. head.prev = last
+6. last.next = head
+7. Return head
+
+==========================
+6) deleteLast()
+--------------------------
+Precondition: head != null
+Postcondition: Last node removed; last node points to head
+Time Complexity: Best = O(1), Average = O(1), Worst = O(1)
+
+Algorithm:
+1. If head == null
+       Print "List is empty"
+       Return
+2. If head.next == head
+       head = null
+       Return
+3. Set last = head.prev
+4. last.prev.next = head
+5. head.prev = last.prev
+6. Return head
+
+==========================
+7) deleteAt(index)
+--------------------------
+Precondition: 0 ≤ index < length
+Postcondition: Node at index removed
+Time Complexity: Best = O(1), Average = O(n), Worst = O(n)
+
+Algorithm:
+1. If head == null
+       Print "List is empty"
+       Return
+2. If index == 0
+       Call deleteFirst()
+       Return
+3. Set ptr = head
+4. For i = 0 to index - 1
+       ptr = ptr.next
+5. ptr.prev.next = ptr.next
+6. ptr.next.prev = ptr.prev
+7. Return head
+
+==========================
+8) search(value)
+--------------------------
+Precondition: List exists
+Postcondition: Prints index if value found; else "Not found"
+Time Complexity: Best = O(1), Average = O(n), Worst = O(n)
+
+Algorithm:
+1. Set ptr = head
+2. index = 0
+3. Do
+       If ptr.data == value
+           Print "Found at index: " + index
+           Return
+       ptr = ptr.next
+       index++
+   While ptr != head
+4. Print "Value not found"
+
+==========================
+9) displayForward()
+--------------------------
+Precondition: head may be null
+Postcondition: Prints all nodes from head to last node
+Time Complexity: Best = O(1), Average = O(n), Worst = O(n)
+
+Algorithm:
+1. If head == null
+       Print "List is empty"
+       Return
+2. Set ptr = head
+3. Do
+       Print ptr.data + " <-> "
+       ptr = ptr.next
+   While ptr != head
+4. Print "(head)"
+
+==========================
+10) displayReverse()
+--------------------------
+Precondition: head may be null
+Postcondition: Prints all nodes from last to head
+Time Complexity: Best = O(1), Average = O(n), Worst = O(n)
+
+Algorithm:
+1. If head == null
+       Print "List is empty"
+       Return
+2. Set ptr = head.prev  // start from last node
+3. Do
+       Print ptr.data + " <-> "
+       ptr = ptr.prev
+   While ptr != head.prev
+4. Print "(head)"
+
+==========================
+11) isEmpty()
+--------------------------
+Precondition: List exists
+Postcondition: Returns true if list empty; else false
+Time Complexity: Best = O(1), Average = O(1), Worst = O(1)
+
+Algorithm:
+1. If head == null
+       Return true
+2. Else
+       Return false
+
+==========================

@@ -1,0 +1,158 @@
+==========================
+DOUBLY CIRCULAR LINKED LIST (DCLL) – EXAM VERSION
+==========================
+
+Node Structure:
+---------------
+class DCNode {
+    int data;
+    DCNode prev;
+    DCNode next;
+    DCNode(int d) { data = d; prev = null; next = null; }
+}
+
+Head Pointer:
+-------------
+DCNode head = null
+
+ADT:
+insertFirst(data), insertLast(data), insertAt(index, data)
+deleteFirst(), deleteLast(), deleteAt(index)
+search(value), displayForward(), displayReverse(), isEmpty()
+
+==========================
+1) insertFirst(data)
+--------------------------
+Algorithm:
+1. Create a new node temp with data.
+2. If head is null:
+      a. head = temp
+      b. temp.next = head
+      c. temp.prev = head
+      d. Return
+3. Else:
+      a. Set last = head.prev
+      b. temp.next = head
+      c. temp.prev = last
+      d. last.next = temp
+      e. head.prev = temp
+      f. head = temp
+4. Return head
+Time Complexity: O(1)
+
+==========================
+2) insertLast(data)
+--------------------------
+Algorithm:
+1. Create a new node temp with data.
+2. If head is null:
+      a. head = temp
+      b. temp.next = head
+      c. temp.prev = head
+      d. Return
+3. Else:
+      a. Set last = head.prev
+      b. last.next = temp
+      c. temp.prev = last
+      d. temp.next = head
+      e. head.prev = temp
+4. Return head
+Time Complexity: O(1)
+
+==========================
+3) insertAt(index, data)
+--------------------------
+Algorithm:
+1. If index = 0, call insertFirst(data) and return.
+2. Create a new node temp with data.
+3. Start from head and move forward index times to reach ptr.
+4. temp.prev = ptr.prev
+5. temp.next = ptr
+6. ptr.prev.next = temp
+7. ptr.prev = temp
+8. If index = 0, update head = temp
+9. Return head
+Time Complexity: O(n)
+
+==========================
+4) deleteFirst()
+--------------------------
+Algorithm:
+1. If head is null, print "List is empty" and return.
+2. If head.next = head, set head = null and return.
+3. Set last = head.prev
+4. Move head = head.next
+5. head.prev = last
+6. last.next = head
+7. Return head
+Time Complexity: O(1)
+
+==========================
+5) deleteLast()
+--------------------------
+Algorithm:
+1. If head is null, print "List is empty" and return.
+2. If head.next = head, set head = null and return.
+3. Set last = head.prev
+4. last.prev.next = head
+5. head.prev = last.prev
+6. Return head
+Time Complexity: O(1)
+
+==========================
+6) deleteAt(index)
+--------------------------
+Algorithm:
+1. If head is null, print "List is empty" and return.
+2. If index = 0, call deleteFirst() and return.
+3. Start from head and move forward index times to reach ptr (node to delete)
+4. ptr.prev.next = ptr.next
+5. ptr.next.prev = ptr.prev
+6. Return head
+Time Complexity: O(n)
+
+==========================
+7) search(value)
+--------------------------
+Algorithm:
+1. Start from head and index = 0
+2. Do:
+      a. If ptr.data = value, print "Found at index: " + index and return
+      b. Move ptr = ptr.next, index++
+   While ptr != head
+3. If value not found, print "Value not found"
+Time Complexity: O(n)
+
+==========================
+8) displayForward()
+--------------------------
+Algorithm:
+1. If head is null, print "List is empty" and return.
+2. Start from head
+3. Do:
+      a. Print ptr.data + "<->"
+      b. Move ptr = ptr.next
+   While ptr != head
+4. Print "(head)"
+Time Complexity: O(n)
+
+==========================
+9) displayReverse()
+--------------------------
+Algorithm:
+1. If head is null, print "List is empty" and return.
+2. Set ptr = head.prev (start from last node)
+3. Do:
+      a. Print ptr.data + "<->"
+      b. Move ptr = ptr.prev
+   While ptr != head.prev
+4. Print "(head)"
+Time Complexity: O(n)
+
+==========================
+10) isEmpty()
+--------------------------
+Algorithm:
+1. If head is null, return true
+2. Else, return false
+Time Complexity: O(1)
